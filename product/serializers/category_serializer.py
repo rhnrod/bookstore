@@ -5,6 +5,7 @@ from product.models.category import Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
+        abstract = False
         fields = [
             'title',
             'slug',
