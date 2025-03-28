@@ -48,7 +48,6 @@ class TestProductViewSet(APITestCase):
             content_type="application/json",
         )
 
-        print(response.content)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         created_product = Product.objects.get(title="notebook")
