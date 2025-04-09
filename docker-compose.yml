@@ -13,11 +13,11 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:13.0-alpine
+    image: postgres:14-alpine
     ports:
-      - 5432:5432
+      - 5433:5432
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - pg-data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=bookstore_dev
       - POSTGRES_PASSWORD=bookstore_dev
@@ -29,5 +29,5 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data:
+  pg-data:
   app_data:

@@ -21,11 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0%yo10+c+)-tuv!asp49p4acgrb2b48gtri+nizkl@w$hu+53!"
+SECRET_KEY = os.environ.get("SECRET_KEY", "foo")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
+    # "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -52,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "bookstore.urls"
@@ -145,15 +151,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-
-DEBUG = int(os.environ.get("DJANGO_DEBUG", default=0))
-
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-]
+STATIC_ROOT = BASE_DIR / "staticfiles"
