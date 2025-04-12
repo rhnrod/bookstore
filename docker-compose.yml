@@ -9,7 +9,7 @@ services:
     env_file:
       - ./env.dev
     networks:
-      - backend
+      - backend_dev
     depends_on:
       - db
   db:
@@ -23,9 +23,9 @@ services:
       - POSTGRES_PASSWORD=bookstore_dev
       - POSTGRES_DB=bookstore_dev_db
     networks:
-      - backend
+      - backend_dev
 networks:
-  backend:
+  backend_dev:
     driver: bridge
 
 volumes:
